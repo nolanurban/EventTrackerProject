@@ -33,11 +33,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -47,7 +46,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `daily` ;
 
 CREATE TABLE IF NOT EXISTS `daily` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `description` TEXT NULL,
   `image_url` VARCHAR(45) NULL,
   `date` VARCHAR(45) NOT NULL,

@@ -22,21 +22,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User createUser(User user) {
-		userRepo.save(user);
+		userRepo.saveAndFlush(user);
 		return user;
 	}
 
 	@Override
 	public User findUserId(int id) {
+		System.out.println("Looking for user # " + id);
 		return userRepo.findById(id).get();
 	}
 
 	@Override
-	public User updateUser(User user) {
-		User updateUser = findUserId(user.getId());
-		updateUser.setUsername(user.getUsername());
+	public User updateUser(int id, User user) {
+		User updateUser = findUserId(id);
+		if (user.getUsername() != null)
+			updateUser.setUsername(user.getUsername());
+		if (user.getPassword() != null)
 		updateUser.setPassword(user.getPassword());
-		userRepo.save(user);
+		userRepo.save(updateUser);
 		return updateUser;
 	}
 

@@ -10,6 +10,6 @@ public interface UserService {
 	List<User> findAllUsers();
 	User createUser(User user);
 	User findUserId(int id);
-	User updateUser(User user);
+	User updateUser(int id, User user);
 	boolean removeUser(User user);
 }
