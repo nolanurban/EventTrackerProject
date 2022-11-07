@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +24,13 @@ public class DailyController {
 		System.out.println("Trying to execute show all days");
 		return dailySvc.listAllDays();
 	}
+	
+	@PostMapping("daily/newactivity")
+	Daily addNewDailyActivity(@RequestBody Daily daily) {
+		dailySvc.addDailyActivity(daily);
+		return daily;
+	}
+	
 	@GetMapping("daily/walking")
 	List<Daily> showWalkingDays() {
 		return dailySvc.findAllDaysByActivity(1);

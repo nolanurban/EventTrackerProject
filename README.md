@@ -22,7 +22,7 @@ Administrators (feature not yet added) will be able to conduct normal CRUD opera
 | Read     | GET       | `/api/daily`|              | lists all posted activities |
 | Read     | GET       | `/api/activities/{id}`|              | shows specific activites  |
 | Read     | GET       | `/api/daily/ACTIVITYNAME`|              | will list all daily posts for activity name (i.e. walking)  |
-
+| Create   | POST      | `/daily/newactivity`         | JSON for daily | JSON of created daily
 | Create   | POST      | `/api/newuser`         | JSON for user | JSON of created user
 | Update   | PUT       | `/api/updateuser/{id}` | JSON to update user | JSON of updated user |
 | Delete   | DELETE    | `/api/removeuser/{id}`|              | |
