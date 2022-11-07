@@ -3,6 +3,7 @@ package com.skilldistillery.gooutside.services;
 import java.util.List;
 
 import com.skilldistillery.gooutside.entities.Activity;
+import com.skilldistillery.gooutside.entities.User;
 
 public interface ActivityService {
 
