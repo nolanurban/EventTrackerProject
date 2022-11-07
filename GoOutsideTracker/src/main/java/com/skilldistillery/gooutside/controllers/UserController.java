@@ -3,6 +3,7 @@ package com.skilldistillery.gooutside.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,5 +44,12 @@ public class UserController {
 	public User updateUser(@PathVariable int id, @RequestBody User user) {
 		userSvc.updateUser(id, user);
 		return user;
+	}
+	@DeleteMapping("removeuser/{id}")
+	public void removeUser(@PathVariable int id) {
+		if (userSvc.removeUser(id) == true)
+			System.out.println("user removed");
+			else
+				System.out.println("error removing user");
 	}
 }

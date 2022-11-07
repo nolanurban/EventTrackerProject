@@ -44,10 +44,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean removeUser(User user) {
+	public boolean removeUser(int id) {
 		boolean isTrue = false;
+		User user = findUserId(id);
 		userRepo.delete(user);
-		if (findUserId(user.getId()) == null) isTrue = true;
+		try {
+			findUserId(user.getId());
+		
+		} catch (Exception e) {
+			isTrue = true;
+		}
 		return isTrue;
 	}
 
