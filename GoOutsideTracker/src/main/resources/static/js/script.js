@@ -155,7 +155,65 @@ function displaySpecificDay(data) {
 						tbody.appendChild(td3);
 			tbody.appendChild(tr);
 		table.appendChild(tbody);
+		
+		/* lets create a footer for the update */
+		
+		let tfoot = document.createElement('tfoot');
+		
+			let tf0 = document.createElement('td');
+				let ip0 = document.createElement('input')
+					tf0.appendChild(ip0);
+						tfoot.appendChild(tf0);
+			let tf1 = document.createElement('td');
+				let ip1 = document.createElement('input')
+					tf1.appendChild(ip1);
+
+							tfoot.appendChild(tf1);
+
+			let tf2 = document.createElement('td');
+				let ip2 = document.createElement('input')
+					tf2.appendChild(ip2);
+
+							tfoot.appendChild(tf2);
+
+			let tf3 = document.createElement('td');
+				let ip3 = document.createElement('input')
+					tf3.appendChild(ip3);
+
+								tfoot.appendChild(tf3);
+
+		
+		
+		table.appendChild(tfoot);
+		
+		
+		
+		/* button work */
+		
+		
+		let deleteButton = document.createElement('button');
+		secondarydiv.appendChild(deleteButton);
+		deleteButton.textContent = 'Delete Entry';
+		deleteButton.addEventListener('click', function(e) { 
+			console.log('delete button working');
+			removeEntry(data.id);
+			console.log(data.id + ' removed from database');
+			});
 			
+		let editButton = document.createElement('button');
+		secondarydiv.appendChild(editButton);
+		editButton.textContent = 'Edit Entry';
+		editButton.addEventListener('click', function(e) {
+			console.log('edit button working');
+				let jObj = {
+					description: data.description,
+					imageUrl: data.imageUrl,
+					date: day,
+					user : { id: data.user.id, username: data.user.username, password: data.user.password },
+					activity : { id: data.activity.id, name: data.activity.name }
+				};
+				
+		});
 
 		
 		let backButton = document.createElement('button');
@@ -171,7 +229,6 @@ function displaySpecificDay(data) {
 		 });		
 		 secondarydiv.appendChild(backButton);
 	
-
 }
 
 function loadAllActivities() {
@@ -333,4 +390,38 @@ xhr.onreadystatechange = function() {
 		}
 	}
 xhr.send(dataObj);	
+}
+
+function updateEntry(id, dataObj) {
+	console.log(dataObj);
+	let xhr = new XMLHttpRequest();
+xhr.open('put', `/api/daily/${id}`, true);
+xhr.setRequestHeader("Content-Type", "application/json;charset-UTF-8");
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == xhr.DONE) {
+			if (xhr.status === 200) {
+				console.log("daily entity updated.")
+				}
+			else {
+				console.log("error updating object");
+			}
+		}
+	}
+xhr.send(dataObj);	
+}
+function removeEntry(id) {
+	let xhr = new XMLHttpRequest();
+xhr.open('delete', `/api/daily/${id}`, true);
+xhr.setRequestHeader("Content-Type", "application/json;charset-UTF-8");
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == xhr.DONE) {
+			if (xhr.status === 200) {
+				console.log("Daily entry removed.")
+				}
+			else {
+				console.log("error removing entry");
+			}
+		}
+	}
+xhr.send();	
 }
