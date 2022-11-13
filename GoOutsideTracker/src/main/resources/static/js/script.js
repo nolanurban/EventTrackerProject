@@ -32,6 +32,8 @@ xhr.send();
 
 function displayAllDaily(data) {
 	let maindiv = document.getElementById("allDays");
+	let secondarydiv = document.getElementById("specificDay");
+		secondarydiv.style.display = "none";
 	let table = document.createElement('table');
 	maindiv.appendChild(table);
 	let th0 = document.createElement('th');
@@ -57,7 +59,7 @@ function displayAllDaily(data) {
 		let tr = document.createElement('tr');
 		table.appendChild(tr);
 		tr.addEventListener('click', function(event) {
-			alert("somebody clicked a row");
+			getSpecificDay(d.id);
 		});
 
 		let td0 = document.createElement('td');
@@ -77,12 +79,99 @@ function displayAllDaily(data) {
 		td4.textContent = d.date;
 				tr.appendChild(td4);
 				console.log('got to the click function');
+				/* we will build into this usig d.user.id to look up each daily activity 
+				and give users the edit / delete function */
 	
 		count++;
 	
 
 	}
 	fetchUser();
+}
+
+function getSpecificDay(id) {
+let xhr = new XMLHttpRequest();
+xhr.open('get', '/api/daily/' + id, true);
+xhr.onreadystatechange = function() {
+	if (xhr.readyState == xhr.DONE) {
+			if (xhr.status === 200) {
+				let activityData = JSON.parse(xhr.responseText);
+				displaySpecificDay(activityData);
+				}
+			else {
+				console.log("error getting activity list");
+			}
+		}
+	}
+xhr.send();
+}
+
+function displaySpecificDay(data) {
+		let maindiv = document.getElementById("allDays");
+		console.log('object recieved: ' + data.user.username);
+		maindiv.style.display = "none";
+		let secondarydiv = document.getElementById("specificDay");
+		secondarydiv.style.display = "block";
+		let table = document.createElement('table');
+		table.id = 'secondaryTable';
+		secondarydiv.appendChild(table);
+
+
+		console.log(table);
+		/* create header */
+		let thead = document.createElement('thead');
+		tr = document.createElement('tr');
+		thead.appendChild(tr); /* new row */
+
+		let th0 = document.createElement('th');
+			th0.textContent = 'User';
+		console.log('headers appending');
+				thead.appendChild(th0);
+		let th1 = document.createElement('th');
+			th1.textContent = 'Activity';
+				thead.appendChild(th1);
+		let th2 = document.createElement('th');
+			th2.textContent = 'Description';
+				thead.appendChild(th2);
+		let th3 = document.createElement('th');
+			th3.textContent = 'Date';
+				thead.appendChild(th3); 
+		table.appendChild(thead);
+		table.appendChild(tr);
+		let tbody = document.createElement('tbody');
+		console.log(tbody);
+			let td0 = document.createElement('td'); /* create data row */
+				td0.textContent = data.user.username;
+					tbody.appendChild(td0);
+			let td1 = document.createElement('td');
+				td1.textContent = data.activity.name;
+						tbody.appendChild(td1);
+						console.log(td1);
+			let td2 = document.createElement('td');
+				td2.textContent = data.description;
+						tbody.appendChild(td2);
+			let td3 = document.createElement('td');
+				td3.textContent = data.date;
+						tbody.appendChild(td3);
+			tbody.appendChild(tr);
+		table.appendChild(tbody);
+			
+
+		
+		let backButton = document.createElement('button');
+		backButton.textContent = 'Go back';
+		backButton.addEventListener('click', function(e) {
+			e.preventDefault();
+			secondarydiv.style.display = "none";
+			
+			let removeTable = document.getElementById('secondaryTable');
+			removeTable.parentNode.removeChild(removeTable);
+			backButton.parentNode.removeChild(backButton);
+			maindiv.style.display = "block";
+		 });		
+		 secondarydiv.appendChild(backButton);
+	
+
 }
 
 function loadAllActivities() {
