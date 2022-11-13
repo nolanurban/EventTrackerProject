@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -16,6 +18,7 @@ public class User {
 	int id;
 	String username;
 	String password;
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	private List<Daily> daily;
 	

@@ -11,8 +11,8 @@ public interface DailyService {
 	Daily findDayId(int id);
 	Daily findDayByDate(LocalDate date);	
 	Daily addDailyActivity(Daily day);
-	boolean  removeDailyActivity(Daily day);
-	Daily updateDaily(Daily day);
+	boolean  removeDailyActivity(int id);
+	Daily updateDaily(int id, Daily day);
 	List<Daily> findAllDaysByActivity(int id);
 	
 }

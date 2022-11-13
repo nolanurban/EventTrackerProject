@@ -38,23 +38,26 @@ public class DailyServiceImpl implements DailyService {
 	}
 
 	@Override
-	public boolean removeDailyActivity(Daily day) {
+	public boolean removeDailyActivity(int id) {
 		boolean isTrue = false;
-		int id = day.getId();
+		Daily day = dailyRepo.findById(id).get();
 		dailyRepo.delete(day);
 		if (dailyRepo.findById(id) == null) 
 			isTrue = true;
 		
-		return true;
+		return isTrue;
 	}
 
 	@Override
-	public Daily updateDaily(Daily day) {
+	public Daily updateDaily(int id, Daily day) {
 
-		Daily updateDay = findDayId(day.getId());
-		updateDay.setDescription(day.getDescription());
-		updateDay.setImageUrl(day.getImageUrl());
-		updateDay.setDate(day.getDate());
+		Daily updateDay = findDayId(id);
+		if (!day.getDescription().isEmpty())
+			updateDay.setDescription(day.getDescription());
+		if (!day.getImageUrl().isEmpty())
+			updateDay.setImageUrl(day.getImageUrl());
+		if (!day.getDate().equals(updateDay.getDate()))
+			updateDay.setDate(day.getDate());
 		updateDay.setUser(day.getUser());
 		updateDay.setActivity(day.getActivity());
 		dailyRepo.save(updateDay);

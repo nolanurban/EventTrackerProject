@@ -22,7 +22,6 @@ public class Daily {
 	@JoinTable(name="image_url")
 	private String imageUrl;
 	private LocalDate date;
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
@@ -54,6 +53,7 @@ public class Daily {
 		return date;
 	}
 	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
 	public User getUser() {

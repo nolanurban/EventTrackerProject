@@ -5,6 +5,8 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<class>com.skilldistillery.gooutside.entities.Activity</class>
+		<class>com.skilldistillery.gooutside.entities.Daily</class>
+		<class>com.skilldistillery.gooutside.entities.User</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url"
