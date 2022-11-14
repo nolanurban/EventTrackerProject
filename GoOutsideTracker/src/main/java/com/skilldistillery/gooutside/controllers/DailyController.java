@@ -2,6 +2,9 @@ package com.skilldistillery.gooutside.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,25 +32,56 @@ public class DailyController {
 	}
 	
 	@PostMapping("daily/newactivity")
-	Daily addNewDailyActivity(@RequestBody Daily daily) {
-		dailySvc.addDailyActivity(daily);
+	Daily addNewDailyActivity(@RequestBody Daily daily, HttpServletResponse res) {
+		try {
+		daily = dailySvc.addDailyActivity(daily);
+		res.setStatus(201);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			daily = null;
+		}
 		return daily;
 	}
 	
 	@GetMapping("daily/{id}") 
-	Daily retrieveDailyById(@PathVariable int id) {
-			return dailySvc.findDayId(id);
+	Daily retrieveDailyById(@PathVariable int id, HttpServletResponse res) {
+		Daily daily = dailySvc.findDayId(id);
+		if (daily == null) { 
+			res.setStatus(404);
+		}
+		return daily;
 	
 	}
 	@PutMapping("daily/{id}") 
-	Daily updateDailyById(@PathVariable int id, @RequestBody Daily daily) {
-		dailySvc.updateDaily(id, daily);
+	Daily updateDailyById(@PathVariable int id, @RequestBody Daily daily, HttpServletResponse res) {
+		try {
+			daily = dailySvc.updateDaily(id, daily);
+			if (daily == null) {
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			daily = null;
+		}
 		return daily;
-	}
+	} 
 	@DeleteMapping("daily/{id}")
-	public void removeDailyById(@PathVariable int id) {
-		if (dailySvc.removeDailyActivity(id)) System.out.println("Removal of entry # " + id + " complete");
-		else System.out.println("There was an error removing entry # " + id);
+	public void removeDailyById(@PathVariable int id, HttpServletResponse res) {
+		try {
+			if (dailySvc.removeDailyActivity(id)) {
+				System.out.println("Removal of entry # " + id + " complete");
+				res.setStatus(204);
+			}
+			else { 
+				System.out.println("There was an error removing entry # " + id);
+				res.setStatus(404);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 	}
 	
 	@GetMapping("daily/walking")
