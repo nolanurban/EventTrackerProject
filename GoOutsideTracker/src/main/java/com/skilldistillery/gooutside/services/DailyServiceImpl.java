@@ -54,9 +54,9 @@ public class DailyServiceImpl implements DailyService {
 		Daily updateDay = findDayId(id);
 		if (!day.getDescription().isEmpty())
 			updateDay.setDescription(day.getDescription());
-		if (!day.getImageUrl().isEmpty())
+		if (day.getImageUrl() != null &&  !day.getImageUrl().isEmpty())
 			updateDay.setImageUrl(day.getImageUrl());
-		if (!day.getDate().equals(updateDay.getDate()))
+		if (day.getDate() != updateDay.getDate())
 			updateDay.setDate(day.getDate());
 		updateDay.setUser(day.getUser());
 		updateDay.setActivity(day.getActivity());
