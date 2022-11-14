@@ -26,3 +26,11 @@ Administrators (feature not yet added) will be able to conduct normal CRUD opera
 | Create   | POST      | `/api/newuser`         | JSON for user | JSON of created user
 | Update   | PUT       | `/api/updateuser/{id}` | JSON to update user | JSON of updated user |
 | Delete   | DELETE    | `/api/removeuser/{id}`|              | |
+
+# JavaScript
+
+I've learned quite a bit about JavaScript and how the organization that exists within Java is not necessarily there without the use of some sort of user based framework.  I made the mistake of placing most of the JS into one large file (script.js) when I should've organized it into at least 3-4 files.  This would've helped me to navigate the DOM which, for the most part, is fairly messy and not intuitive to the newcomer.  
+
+I am particularly proud that I was able to navigate was hiding the user data (this will be eliminated later when we learn more about security) within the document itself to pass objects.
+
+Additionally, creating objects in JSON was interesting as well as accessing different layers of the DOM to populate them.
