@@ -1,5 +1,5 @@
 window.addEventListener('load', function(e) {
-	 ('script.js loaded')
+	console.log('script.js loaded')
 
 	initialize(); // our starter function
 	loadAllActivities();
@@ -8,7 +8,7 @@ window.addEventListener('load', function(e) {
 
 function initialize() {
 	// Set up event listeners
-	 ('Now initializing');
+	console.log('Now initializing');
 	loadAllDaily();
 	
 }
@@ -24,7 +24,7 @@ xhr.onreadystatechange = function() {
 				displayAllDaily(dailyData)
 				}
 			else {
-				 ("error getting daily list");
+				console.log("error getting daily list");
 			}
 		}
 	}
@@ -37,8 +37,8 @@ function displayAllDaily(data) {
 		secondarydiv.style.display = "none";
 	let table = document.createElement('table');
 	table.setAttribute("id", "mainTable");
-	 ("this is main div");
-	 (maindiv);
+	console.log("this is main div");
+	console.log(maindiv);
 	maindiv.appendChild(table);
 	let th0 = document.createElement('th');
 	th0.textContent = 'Number';
@@ -56,8 +56,8 @@ function displayAllDaily(data) {
 	th4.textContent = 'Date';
 	table.appendChild(th4);
 
-     ('comes to initialize here *******');
-     (table);
+    console.log('comes to initialize here *******');
+    console.log(table);
 
 	
 		let count = 1;
@@ -84,7 +84,7 @@ function displayAllDaily(data) {
 		let td4 = document.createElement('td');
 		td4.textContent = d.date;
 				tr.appendChild(td4);
-				 ('got to the click function');
+				console.log('got to the click function');
 				/* we will build into this usig d.user.id to look up each daily activity 
 				and give users the edit / delete function */
 	
@@ -105,7 +105,7 @@ xhr.onreadystatechange = function() {
 				displaySpecificDay(activityData);
 				}
 			else {
-				 ("error getting activity list");
+				console.log("error getting activity list");
 			}
 		}
 	}
@@ -114,7 +114,7 @@ xhr.send();
 
 function displaySpecificDay(data) {
 		let maindiv = document.getElementById("allDays");
-		 ('object recieved: ' + data.user.username);
+		console.log('object recieved: ' + data.user.username);
 		maindiv.style.display = "none";
 		let secondarydiv = document.getElementById("specificDay");
 		secondarydiv.style.display = "block";
@@ -123,7 +123,7 @@ function displaySpecificDay(data) {
 		secondarydiv.appendChild(table);
 
 
-		 (table);
+		console.log(table);
 		/* create header */
 		let thead = document.createElement('thead');
 		tr = document.createElement('tr');
@@ -131,7 +131,7 @@ function displaySpecificDay(data) {
 
 		let th0 = document.createElement('th');
 			th0.textContent = 'User';
-		 ('headers appending');
+		console.log('headers appending');
 				thead.appendChild(th0);
 		let th1 = document.createElement('th');
 			th1.textContent = 'Activity';
@@ -145,14 +145,14 @@ function displaySpecificDay(data) {
 		table.appendChild(thead);
 		table.appendChild(tr);
 		let tbody = document.createElement('tbody');
-		 (tbody);
+		console.log(tbody);
 			let td0 = document.createElement('td'); /* create data row */
 				td0.textContent = data.user.username;
 					tbody.appendChild(td0);
 			let td1 = document.createElement('td');
 				td1.textContent = data.activity.name;
 						tbody.appendChild(td1);
-						 (td1);
+						console.log(td1);
 			let td2 = document.createElement('td');
 				td2.textContent = data.description;
 						tbody.appendChild(td2);
@@ -195,19 +195,19 @@ function displaySpecificDay(data) {
 		secondarydiv.appendChild(editButton);
 		editButton.textContent = 'Edit Entry';
 		editButton.addEventListener('click', function(e) {
-			 ("DROP DOWN: ");
+			console.log("DROP DOWN: ");
 			
-			 (drop);
+			console.log(drop);
 			
-			 (drop.options[drop.selectedIndex].text);
+			console.log(drop.options[drop.selectedIndex].text);
 
-			 ('edit button working');
-			 (ip2.value);
+			console.log('edit button working');
+			console.log(ip2.value);
 			if (ip3.value == null || ip3.value == '') {
 					let today = new Date();
 					ip3.value = today.toISOString().split('T')[0];
 					}
-			 (ip3.value);
+			console.log(ip3.value);
 				let jObj = {
 					description: ip2.value,
 					imageUrl: data.imageUrl,
@@ -215,9 +215,9 @@ function displaySpecificDay(data) {
 					user : { id: data.user.id, username: data.user.username, password: data.user.password },
 					activity : { id: drop.options[drop.selectedIndex].value, name: drop.options[drop.selectedIndex].text }
 				};
-				 (jObj);
+				console.log(jObj);
 				updateEntry(data.id, jObj);
-				 ('Update success?');
+				console.log('Update success?');
 				
 		});
 		
@@ -229,9 +229,9 @@ function displaySpecificDay(data) {
 		secondarydiv.appendChild(deleteButton);
 		deleteButton.textContent = 'Delete Entry';
 		deleteButton.addEventListener('click', function(e) { 
-			 ('delete button working');
+			console.log('delete button working');
 			removeEntry(data.id);
-			 (data.id + ' removed from database');
+			console.log(data.id + ' removed from database');
 			});
 
 		
@@ -267,7 +267,7 @@ xhr.onreadystatechange = function() {
 				dropDownActivityMenu(activityData)
 				}
 			else {
-				 ("error getting activity list");
+				console.log("error getting activity list");
 			}
 		}
 	}
@@ -298,7 +298,7 @@ xhr.onreadystatechange = function() {
 				dropDownActivityMenu(activityData)
 				}
 			else {
-				 ("error getting activity list");
+				console.log("error getting activity list");
 			}
 		}
 	}
@@ -313,10 +313,10 @@ xhr.onreadystatechange = function() {
 	if (xhr.readyState == xhr.DONE) {
 			if (xhr.status === 200) {
 				hideUserData(JSON.parse(xhr.responseText));
-				 ('passing user data to hideUserData');
+				console.log('passing user data to hideUserData');
 				}
 			else {
-				 ("error getting activity list");
+				console.log("error getting activity list");
 			}
 		}
 	}
@@ -345,30 +345,30 @@ function hideUserData(data) {
 	hiddenInput2.value = data.password;
 	form1.appendChild(hiddenInput2);
 
-	 (hiddenInput);
-		 (hiddenInput1);
-			 (hiddenInput2);
+	console.log(hiddenInput);
+		console.log(hiddenInput1);
+			console.log(hiddenInput2);
 }
 
 function submitFormMakeNewDailyObj() {
 	let button = document.getElementById("myButton");
-	 (button);
+	console.log(button);
 	button.addEventListener('click', function (e) { 
 		
 		let addNewDay = document.getElementById("addNewDay");
-		 (addNewDay);
+		console.log(addNewDay);
 		let description = document.getElementById("description");
-		 (description);
+		console.log(description);
 		if (description.value === '') alert('Cannot submit without description.');
 		//if (form.date === '') alert('Must have a date');
 		let date = document.getElementById("date");
 		let imageUrl = document.getElementById("imageurl");
-		 (date.value);
+		console.log(date.value);
 		if (date.value === '') date = Date.now();
-		 (date);
+		console.log(date);
 		let select = document.getElementById("selectActivity");
-		 (select.value);
-		 (select.options[select.selectedIndex].text);
+		console.log(select.value);
+		console.log(select.options[select.selectedIndex].text);
 		let activity = {
 			id: select.value,
 			name: select.options[select.selectedIndex].text
@@ -382,11 +382,11 @@ function submitFormMakeNewDailyObj() {
 			username: uu.value,
 			password: up.value
 		}
-		 (uid.value + " " + uu.value + " " + up.value);	
+		console.log(uid.value + " " + uu.value + " " + up.value);	
 		
 		setNewDailyObj(description.value, imageUrl.value, date.value, user, activity);
 	});
-	 ("this happened");
+	console.log("this happened");
 }
 
 function setNewDailyObj(desc, img, day, u, a) {
@@ -397,21 +397,21 @@ function setNewDailyObj(desc, img, day, u, a) {
 		user : { id: u.id, username: u.username, password: u.password },
 		activity : { id: a.id, name: a.name }
 	};
-	 ("attempting to create new daily entry");
+	console.log("attempting to create new daily entry");
 	createNewEntry(JSON.stringify(jObj));
 }
 function createNewEntry(dataObj) {
-	 (dataObj);
+	console.log(dataObj);
 	let xhr = new XMLHttpRequest();
 xhr.open('post', `api/daily/newactivity`, true);
 xhr.setRequestHeader("Content-Type", "application/json;charset-UTF-8");
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == xhr.DONE) {
 			if (xhr.status === 200) {
-				 ("new daily entity added.")
+				console.log("new daily entity added.")
 				}
 			else {
-				 ("error posting object");
+				console.log("error posting object");
 			}
 		}
 	}
@@ -419,17 +419,17 @@ xhr.send(dataObj);
 }
 
 function updateEntry(id, dataObj) {
-	 (dataObj);
+	console.log(dataObj);
 	let xhr = new XMLHttpRequest();
 xhr.open('put', `api/daily/${id}`, true);
 xhr.setRequestHeader("Content-Type", "application/json;charset-UTF-8");
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == xhr.DONE) {
 			if (xhr.status === 200) {
-				 ("daily entity updated.")
+				console.log("daily entity updated.")
 				}
 			else {
-				 ("error updating object");
+				console.log("error updating object");
 			}
 		}
 	}
@@ -442,10 +442,10 @@ xhr.setRequestHeader("Content-Type", "application/json;charset-UTF-8");
 xhr.onreadystatechange = function() {
 	if (xhr.readyState == xhr.DONE) {
 			if (xhr.status === 200) {
-				 ("Daily entry removed.")
+				console.log("Daily entry removed.")
 				}
 			else {
-				 ("error removing entry");
+				console.log("error removing entry");
 			}
 		}
 	}
