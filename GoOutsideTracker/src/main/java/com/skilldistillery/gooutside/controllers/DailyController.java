@@ -2,10 +2,10 @@ package com.skilldistillery.gooutside.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +20,7 @@ import com.skilldistillery.gooutside.services.DailyService;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin({"*", "http://localhost:8083/"})
 public class DailyController {
 
 	@Autowired 
