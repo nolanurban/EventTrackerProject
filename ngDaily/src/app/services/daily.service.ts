@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Activity } from '../models/activity';
 import { Daily } from '../models/daily';
 
@@ -9,14 +10,14 @@ import { Daily } from '../models/daily';
 })
 export class DailyService {
 
-  baseUrl = 'http://localhost:8083/';
-  url = this.baseUrl + 'api/daily';
+  // baseUrl = 'http://localhost:8083/';
+  url = environment.baseUrl + 'api/daily';
 
-  activityUrl = this.baseUrl + 'api/activities/showall';
+  activityUrl = environment.baseUrl+ 'api/activities/showall';
 
-  newActivityUrl = this.baseUrl + 'api/daily/newactivity';
+  newActivityUrl = environment.baseUrl + 'api/daily/newactivity';
 
-  removeUrl = this.baseUrl + 'api/daily';
+  removeUrl = environment.baseUrl + 'api/daily';
 constructor(
     private http: HttpClient
   ) { }

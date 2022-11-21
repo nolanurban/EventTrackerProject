@@ -115,6 +115,8 @@ export class HomeComponent implements OnInit {
       next: (data) => {
         console.log('updateDaily: updating entry');
         this.editDaily = null;
+        this.loadDaily();
+
       },
       error: (fail) => {
         console.error('updateDaily: error updating entry');
