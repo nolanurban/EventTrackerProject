@@ -3,6 +3,7 @@ package com.skilldistillery.gooutside.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +17,9 @@ import com.skilldistillery.gooutside.entities.User;
 import com.skilldistillery.gooutside.services.UserService;
 
 
-
 @RestController
 @RequestMapping("api")
+@CrossOrigin({"*", "http://localhost:8083/"})
 public class UserController {
 
 	@Autowired

@@ -26,6 +26,8 @@ Administrators (feature not yet added) will be able to conduct normal CRUD opera
 | Create   | POST      | `/api/newuser`         | JSON for user | JSON of created user
 | Update   | PUT       | `/api/updateuser/{id}` | JSON to update user | JSON of updated user |
 | Delete   | DELETE    | `/api/removeuser/{id}`|              | |
+| Delete   | DELETE    | `/api/daily/{id}`|              | Removes Daily entries|
+| Read     | GET       | `/api/daily/{id}`|              | fetches activity by ID |
 
 # JavaScript
 
@@ -34,3 +36,21 @@ I've learned quite a bit about JavaScript and how the organization that exists w
 I am particularly proud that I was able to navigate was hiding the user data (this will be eliminated later when we learn more about security) within the document itself to pass objects.
 
 Additionally, creating objects in JSON was interesting as well as accessing different layers of the DOM to populate them.
+
+# Angular
+
+The addition of Angular was both pleasant and painful at times.  I can see how the addition of Angular can help with massively large projects and websites (Amazon or FB) because the amount of component organization that exists.  In another sense, it's something someone would need to wholly focus on because TypeScript also has its own set of weirdness at many turns trying to organize a largely disorganized language.
+
+I'll need to re-work most of this project to utilize the power of routing and also establish a User interface utilizing Spring security code (which we covered for a day).
+
+# VS Code
+
+I am impressed with VS code as an editor but there are odd quirks and autocompletes I have yet to get used to.  I have an issue with backspacing turning into deletions as well as auto completes happening in odd ways that add a layer of frustration atop of the code.
+
+# Lessons learned
+
+Working with a back end server I should've simplified my access points.  As you can see up top, I have an absolute ton for a program that literally tracks a daily entry for a certain set of activities.  
+
+JavaScript can be extremely messy so it's imperative we establish a framework to keep it easily legible and simple to navigate (on the programmer and user end.)
+
+TypeScript & Angular are far more organized but have their own quirks.  Overall, Angular is far superior in establishing a quick boiler plate to launch off of.  The upside of this (downside) is the programmer can see there is something wrong quite quickly and I do love the fact the website auto-refreshes on every change. There are a lot of possibilities here and I plan on revisiting at least one project and make it over with Angular.  

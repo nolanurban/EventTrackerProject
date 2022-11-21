@@ -1,1 +1,65 @@
-<p>home works!</p>
+<div id="maindiv" *ngIf="!selectedDaily">
+<table class="table table-sm border border-primary rounded" >
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Activity</th>
+      <th scope="col">Description</th>
+      <th scope="col">Date</th>
+      <th scope="col">Image</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of daily">
+      <td>{{d.id}}</td>
+      <td >{{d.activity.name}}</td>
+      <td (click)="handleClick(d)">{{d.description}}</td>
+      <td>{{d.date}}</td>
+      <td>{{d.imageUrl}}</td>
+      <td><button class="danger" (click)="deleteDaily(d.id)">Delete</button></td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+<div id="newDiv">
+  <h1>Add a new Daily entry</h1>
+Activity: <select [ngModel]="selectedNewActivity" (change)="setNewActivity($event.target)"><option *ngFor="let a of activitySelect" value={{a.id}}>{{a.name}}</option></select>
+Description <input type="text" name="description" [(ngModel)]="newDaily.description">
+Date <input type="date" name="date" [(ngModel)]="newDaily.date">
+<input type="submit" (click)="addDaily(newDaily)">
+</div>
+
+<div id="selectedDiv" *ngIf="selectedDaily">
+<table>
+  <td>
+    ID OF POST
+    {{selectedDaily.id}}
+  </td>
+  <tr></tr>
+  <td>
+    <img src="{{selectedDaily.imageUrl}}" width="200" height="300">
+  </td>
+  <tr></tr>
+  <td>
+    {{selectedDaily.description}}
+  </td>
+  <tr></tr>
+  <td>
+    {{selectedDaily.date}}
+  </td>
+</table>
+<button (click)="selectedDaily = null">Return to Table</button>
+<button (click)="editEntry = true; setUpdateDaily()">Edit Entry</button>
+</div>
+
+<div id="editingDiv" *ngIf="selectedDaily && editEntry">
+Post ID#: {{editDaily!.id}}
+Other ID#: {{selectedDaily!.id}}
+Updated Image URL <input type="text" [(ngModel)]="editDaily!.imageUrl">
+Updated Description <input type="text" [(ngModel)]="editDaily!.description">
+Updated Date <input type="date" [(ngModel)]="editDaily!.date">
+Updated Activity <select (ngValue)="editDaily!.activity"><option *ngFor="let a of activitySelect" value={{a.id}}>{{a.name}}</option></select>
+<input type="submit" (click)="showObjectFields(editDaily!); updateDaily(editDaily!.id, editDaily!); selectedDaily = null; editDaily = null; editEntry = false">
+</div>

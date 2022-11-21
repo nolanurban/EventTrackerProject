@@ -39,8 +39,10 @@ public class DailyServiceImpl implements DailyService {
 
 	@Override
 	public boolean removeDailyActivity(int id) {
+		System.out.println("at the service, value of id is: " + id);
 		boolean isTrue = false;
 		Daily day = dailyRepo.findById(id).get();
+		System.out.println("getting ready to remove: " + day);
 		dailyRepo.delete(day);
 		if (dailyRepo.findById(id) == null) 
 			isTrue = true;

@@ -70,15 +70,17 @@ public class DailyController {
 	} 
 	@DeleteMapping("daily/{id}")
 	public void removeDailyById(@PathVariable int id, HttpServletResponse res) {
+		System.out.println("in the controller, id is : " + id);
 		try {
-			if (dailySvc.removeDailyActivity(id)) {
-				System.out.println("Removal of entry # " + id + " complete");
-				res.setStatus(204);
-			}
-			else { 
-				System.out.println("There was an error removing entry # " + id);
-				res.setStatus(404);
-			}
+			dailySvc.removeDailyActivity(id);
+//			if (dailySvc.removeDailyActivity(id)) {
+//				System.out.println("Removal of entry # " + id + " complete");
+//				res.setStatus(204);
+//			}
+//			else { 
+//				System.out.println("There was an error removing entry # " + id);
+//				res.setStatus(404);
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
